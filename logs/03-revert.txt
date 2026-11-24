@@ -1,0 +1,86 @@
+$ git init -b main
+Initialized empty Git repository in ./03-revert/.git/
+[exit 0]
+
+$ git config user.name Student
+[exit 0]
+
+$ git config user.email student@example.test
+[exit 0]
+
+$ git config commit.gpgsign false
+[exit 0]
+
+$ git config core.autocrlf false
+[exit 0]
+
+$ git add app.py
+[exit 0]
+
+$ git commit -m Add version 1
+[main (root-commit) b8efe1e] Add version 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.py
+[exit 0]
+
+$ git rev-parse HEAD
+b8efe1e7b4440a5e851b9a05c8eedab9ddd9693d
+[exit 0]
+
+$ git add app.py
+[exit 0]
+
+$ git commit -m Add version 2
+[main 2edad7b] Add version 2
+ 1 file changed, 1 insertion(+)
+[exit 0]
+
+$ git rev-parse HEAD
+2edad7ba1a3488315cfd7d0198a5e1f841fd8af4
+[exit 0]
+
+$ git add app.py
+[exit 0]
+
+$ git commit -m Add version 3
+[main 1ffd382] Add version 3
+ 1 file changed, 1 insertion(+)
+[exit 0]
+
+$ git rev-parse HEAD
+1ffd382164e89b2682c42c4a7f1c0d32f5c01c85
+[exit 0]
+
+$ git log --oneline
+1ffd382 Add version 3
+2edad7b Add version 2
+b8efe1e Add version 1
+[exit 0]
+
+$ git revert --no-edit HEAD
+[main 78fc10c] Revert "Add version 3"
+ Date: Tue Nov 24 22:09:17 2026 +0600
+ 1 file changed, 1 deletion(-)
+[exit 0]
+
+$ git log --oneline
+78fc10c Revert "Add version 3"
+1ffd382 Add version 3
+2edad7b Add version 2
+b8efe1e Add version 1
+[exit 0]
+
+$ git status --short
+[exit 0]
+
+$ git rev-list --count HEAD
+4
+[exit 0]
+
+$ git rev-parse HEAD~1
+1ffd382164e89b2682c42c4a7f1c0d32f5c01c85
+[exit 0]
+
+$ git diff 2edad7ba1a3488315cfd7d0198a5e1f841fd8af4 HEAD -- app.py
+[exit 0]
+

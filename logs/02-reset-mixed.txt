@@ -1,0 +1,76 @@
+$ git init -b main
+Initialized empty Git repository in ./02-reset-mixed/.git/
+[exit 0]
+
+$ git config user.name Student
+[exit 0]
+
+$ git config user.email student@example.test
+[exit 0]
+
+$ git config commit.gpgsign false
+[exit 0]
+
+$ git config core.autocrlf false
+[exit 0]
+
+$ git add app.py
+[exit 0]
+
+$ git commit -m Add version 1
+[main (root-commit) e358144] Add version 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.py
+[exit 0]
+
+$ git rev-parse HEAD
+e358144f8d2a4391b3734a0a5f562e406763e9d1
+[exit 0]
+
+$ git add app.py
+[exit 0]
+
+$ git commit -m Add version 2
+[main 3c18d26] Add version 2
+ 1 file changed, 1 insertion(+)
+[exit 0]
+
+$ git log --oneline
+3c18d26 Add version 2
+e358144 Add version 1
+[exit 0]
+
+$ git reset --mixed HEAD~1
+Unstaged changes after reset:
+M	app.py
+[exit 0]
+
+$ git status --short
+ M app.py
+[exit 0]
+
+$ git log --oneline
+e358144 Add version 1
+[exit 0]
+
+$ git diff --staged
+[exit 0]
+
+$ git diff
+diff --git a/app.py b/app.py
+index 3b95756..6ededed 100644
+--- a/app.py
++++ b/app.py
+@@ -1 +1,2 @@
+ print("Version 1")
++print("Version 2")
+[exit 0]
+
+$ git rev-parse HEAD
+e358144f8d2a4391b3734a0a5f562e406763e9d1
+[exit 0]
+
+$ git rev-list --count HEAD
+1
+[exit 0]
+
